@@ -13,7 +13,7 @@ export class News extends Component {
   }
 
   async componentDidMount() {
-    let url = `https://newsapi.org/v2/everything?q=${this.props.country}&apiKey=1b7fc29662bb4bd0ab71c268ddf69b8b&page=1&pageSize=${this.props.pageSize}`
+    let url = `https://newsapi.org/v2/everything?q=${this.props.country}&apiKey=1b7fc29662bb4bd0ab71c268ddf69b8b&page=1&pageSize=${this.props.pageSize}&language=en`
     this.setState({ loading: true })
     let data = await fetch(url)
     let parseData = await data.json()
@@ -25,7 +25,7 @@ export class News extends Component {
   }
 
   handleprev = async () => {
-    let url = `https://newsapi.org/v2/everything?q=${this.props.country}&apiKey=1b7fc29662bb4bd0ab71c268ddf69b8b&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`
+    let url = `https://newsapi.org/v2/everything?q=${this.props.country}&apiKey=1b7fc29662bb4bd0ab71c268ddf69b8b&page=${this.state.page - 1}&pageSize=${this.props.pageSize}&language=en`
     this.setState({ loading: true })
     let data = await fetch(url)
     let parseData = await data.json()
@@ -37,7 +37,7 @@ export class News extends Component {
   }
 
   handlenext = async () => {
-    let url = `https://newsapi.org/v2/everything?q=${this.props.country}&apiKey=1b7fc29662bb4bd0ab71c268ddf69b8b&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`
+    let url = `https://newsapi.org/v2/everything?q=${this.props.country}&apiKey=1b7fc29662bb4bd0ab71c268ddf69b8b&page=${this.state.page + 1}&pageSize=${this.props.pageSize}&language=en`
     this.setState({ loading: true })
     let data = await fetch(url)
     let parseData = await data.json()
@@ -80,7 +80,7 @@ export class News extends Component {
           <button
             type="button"
             disabled={
-              this.state.page + 1 > Math.ceil(this.state.totalResults / 20)
+              this.state.page + 1 > Math.ceil(this.state.totalResults / this.props.pageSize)
             }
             className="btn btn-dark"
             onClick={this.handlenext}
